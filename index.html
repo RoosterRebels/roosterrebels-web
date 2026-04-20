@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rooster Rebels</title>
+  <meta name="description" content="PLC development, commissioning and industrial automation support worldwide." />
+  <style>
+    :root {
+      --bg: #f3f6fb;
+      --panel: #ffffff;
+      --panel-soft: #edf3ff;
+      --line: #dbe3ef;
+      --text: #08152d;
+      --muted: #5e6f88;
+      --accent: #2563ff;
+      --accent-2: #1d4ed8;
+      --radius: 20px;
+      --max: 1180px;
+      --shadow: 0 14px 40px rgba(15, 23, 42, 0.05);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+
+    .wrap {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand-wrap {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      min-width: 0;
+    }
+
+    .brand-mark {
+      width: 112px;
+      height: 56px;
+      display: block;
+      flex: 0 0 auto;
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 18px;
+      border-left: 2px solid var(--line);
+      line-height: 1.02;
+      min-width: 0;
+    }
+
+    .brand-name {
+      font-size: 19px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      white-space: nowrap;
+    }
+
+    .brand-name .accent { color: var(--accent); }
+
+    .brand-tagline {
+      margin-top: 6px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 42px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links button {
+      padding: 0 0 10px;
+      font-size: 14px;
+      color: var(--muted);
+      background: transparent;
+      border: 0;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: .18s ease;
+    }
+
+    .nav-links button:hover,
+    .nav-links button:focus-visible {
+      color: var(--text);
+    }
+
+    .nav-links .is-active {
+      color: var(--accent);
+      font-weight: 700;
+      border-bottom-color: var(--accent);
+    }
+
+    .hero {
+      padding: 40px 0 24px;
+    }
+
+    .hero-copy,
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 50px 48px 42px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(3rem, 4.7vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+    }
+
+    .lead {
+      max-width: 880px;
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.65;
+    }
+
+    .chips {
+      margin-top: 28px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid #e5ebf5;
+      background: var(--panel-soft);
+      color: #41516d;
+      font-size: 12px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .content-shell {
+      padding: 16px 0 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .tab-panel {
+      display: none;
+      padding: 28px 0 8px;
+    }
+
+    .tab-panel.is-visible {
+      display: block;
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: 28px;
+      letter-spacing: -0.03em;
+    }
+
+    .grid-3 {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: 1.15fr 1fr 1fr;
+    }
+
+    .grid-2 {
+      display: grid;
+      gap: 24px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      padding: 30px;
+    }
+
+    .service-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: var(--panel-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      flex: 0 0 auto;
+    }
+
+    .icon-box svg {
+      width: 30px;
+      height: 30px;
+      display: block;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 18px;
+      line-height: 1.28;
+      letter-spacing: -0.02em;
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 22px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .card li { margin-bottom: 6px; }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: white;
+      color: var(--text);
+      margin-bottom: 10px;
+      outline: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder { color: #94a3b8; }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(37, 99, 255, 0.18);
+    }
+
+    .form-note {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .email-links a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 18px 0 34px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      h1 { white-space: normal; }
+      .grid-3,
+      .grid-2,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-copy,
+      .card {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 800px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 18px 0;
+      }
+
+      .nav-links {
+        gap: 24px;
+      }
+
+      .brand-mark {
+        width: 98px;
+        height: 50px;
+      }
+
+      .brand-copy {
+        padding-left: 14px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-tagline {
+        letter-spacing: 2px;
+      }
+
+      .hero-copy {
+        padding: 28px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <div class="brand-wrap">
+        <a href="#top" aria-label="Rooster Rebels home">
+          <svg class="brand-mark" viewBox="0 0 140 70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="RR logo">
+            <defs>
+              <linearGradient id="rrg" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#2563ff"/>
+                <stop offset="100%" stop-color="#1d4ed8"/>
+              </linearGradient>
+            </defs>
+            <text x="4" y="50" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="48" font-weight="900" letter-spacing="-4" fill="#08152d">R</text>
+            <text x="46" y="50" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="48" font-weight="900" letter-spacing="-4" fill="url(#rrg)">R</text>
+          </svg>
+        </a>
+        <div class="brand-copy">
+          <div class="brand-name">Rooster <span class="accent">Rebels</span></div>
+          <div class="brand-tagline">From Code to Production</div>
+        </div>
+      </div>
+
+      <div class="nav-links" role="tablist" aria-label="Sections">
+        <button type="button" class="tab-link is-active" data-tab="services" role="tab" aria-selected="true">Services</button>
+        <button type="button" class="tab-link" data-tab="experience" role="tab" aria-selected="false">Experience</button>
+        <button type="button" class="tab-link" data-tab="contact" role="tab" aria-selected="false">Contact</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Worldwide Industrial Automation Support</div>
+        <h1>Development &amp; Commissioning</h1>
+        <p class="lead">End-to-end automation delivery — PLC development, hands-on commissioning, troubleshooting and on-site execution to bring your production into operation.</p>
+
+        <div class="chips">
+          <span class="chip">S7-300 / S7-400</span>
+          <span class="chip">S7-1200 / S7-1500</span>
+          <span class="chip">WinCC</span>
+          <span class="chip">Allen-Bradley</span>
+          <span class="chip">FactoryTalk</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="content-shell">
+      <section id="services" class="tab-panel is-visible" data-panel="services">
+        <h2>Services</h2>
+        <div class="grid-3">
+          <div class="card">
+            <div class="service-head">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="7 8 3 12 7 16"></polyline>
+                  <polyline points="17 8 21 12 17 16"></polyline>
+                  <line x1="14" y1="4" x2="10" y2="20"></line>
+                </svg>
+              </div>
+              <h3>PLC Development &amp; Commissioning</h3>
+            </div>
+            <ul>
+              <li>PLC programming</li>
+              <li>WinCC &amp; FactoryTalk integration</li>
+              <li>On-site debugging &amp; start-up</li>
+              <li>I/O, interlocks &amp; sequence checks</li>
+              <li>FAT / SAT support</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="service-head">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <circle cx="8" cy="9" r="4"></circle>
+                  <circle cx="17" cy="8" r="3"></circle>
+                  <path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"></path>
+                  <path d="M13 20c0-2.8 2.2-5 5-5 2 0 3.7 1.1 4.5 2.8"></path>
+                </svg>
+              </div>
+              <h3>On-site Project Management</h3>
+            </div>
+            <ul>
+              <li>Commissioning coordination</li>
+              <li>Daily reporting</li>
+              <li>Issue tracking</li>
+              <li>Customer &amp; design coordination</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <div class="service-head">
+              <div class="icon-box" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.14 12.94c.04-.31.06-.63.06-.94s-.02-.63-.06-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.6-.22l-2.39.96a7.07 7.07 0 0 0-1.63-.94l-.36-2.54A.5.5 0 0 0 13.9 1h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.58.22-1.12.53-1.63.94l-2.39-.96a.5.5 0 0 0-.6.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.63-.06.94s.02.63.06.94l-2.03 1.58a.5.5 0 0 0-.12.64l1.92 3.32a.5.5 0 0 0 .6.22l2.39-.96c.51.41 1.05.72 1.63.94l.36 2.54a.5.5 0 0 0 .49.42h3.8a.5.5 0 0 0 .49-.42l.36-2.54c.58-.22 1.12-.53 1.63-.94l2.39.96a.5.5 0 0 0 .6-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.5A3.5 3.5 0 1 1 12 8a3.5 3.5 0 0 1 0 7.5Z"></path>
+                </svg>
+              </div>
+              <h3>Automation Support</h3>
+            </div>
+            <ul>
+              <li>Retrofit support</li>
+              <li>Optimization support</li>
+              <li>Independent commissioning</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience" class="tab-panel" data-panel="experience">
+        <h2>Experience</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Typical Deliverables</h3>
+            <ul>
+              <li>Commissioning plan</li>
+              <li>Issue tracking</li>
+              <li>Test records</li>
+              <li>Daily reporting</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>Work Style</h3>
+            <ul>
+              <li>Hands-on troubleshooting</li>
+              <li>Clear communication</li>
+              <li>Production focused</li>
+              <li>Structured on-site execution</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="tab-panel" data-panel="contact">
+        <h2>Contact</h2>
+        <div class="contact-grid">
+          <div class="card">
+            <h3>Contact Information</h3>
+
+            <div style="display:flex; align-items:center; gap:14px; margin-top:10px;">
+              <div style="width:42px; height:42px; border-radius:12px; background:#eef2f8; display:flex; align-items:center; justify-content:center; font-size:18px;">✉️</div>
+              <div>
+                <div style="font-size:13px; color:#64748b;">Email</div>
+                <div class="email-links"><a href="mailto:info@roosterrebels.com">info@roosterrebels.com</a></div>
+              </div>
+            </div>
+
+            <hr style="margin:20px 0; border:none; border-top:1px solid #e2e8f0;">
+
+            <div style="display:flex; align-items:center; gap:14px;">
+              <div style="width:42px; height:42px; border-radius:12px; background:#eef2f8; display:flex; align-items:center; justify-content:center; font-size:18px; color:#2563ff; font-weight:800;">in</div>
+              <div>
+                <div style="font-size:13px; color:#64748b;">LinkedIn</div>
+                <div style="color:#64748b;">Add your LinkedIn URL here</div>
+              </div>
+            </div>
+
+            <div style="margin-top:22px; padding:16px; background:#f1f4fb; border-radius:14px;">
+              <div style="font-weight:700; margin-bottom:8px;">What to send</div>
+              <ul style="margin:0; padding-left:18px; color:#64748b; font-size:14px; line-height:1.7;">
+                <li>Project scope and goals</li>
+                <li>Location and timeline</li>
+                <li>System and technology details</li>
+                <li>Any specific challenges</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="card">
+            <form id="form">
+              <input id="location" placeholder="Location">
+              <input id="timeline" placeholder="Timeline">
+              <textarea id="scope" placeholder="Scope"></textarea>
+              <button class="btn" type="submit">Create email draft</button>
+              <span class="form-note">This form does not send data anywhere. It only opens your email client with a prepared draft.</span>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © Rooster Rebels
+  </footer>
+
+  <script>
+    const form = document.getElementById('form');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const loc = document.getElementById('location').value;
+      const tim = document.getElementById('timeline').value;
+      const sc = document.getElementById('scope').value;
+
+      const body = `Location: ${loc}\nTimeline: ${tim}\nScope: ${sc}`;
+      window.location.href = `mailto:info@roosterrebels.com?subject=Project&body=${encodeURIComponent(body)}`;
+    });
+
+    const tabLinks = document.querySelectorAll('.tab-link');
+    const panels = document.querySelectorAll('.tab-panel');
+
+    function setActiveTab(tabName) {
+      tabLinks.forEach((link) => {
+        const isActive = link.dataset.tab === tabName;
+        link.classList.toggle('is-active', isActive);
+        link.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      panels.forEach((panel) => {
+        panel.classList.toggle('is-visible', panel.dataset.panel === tabName);
+      });
+    }
+
+    tabLinks.forEach((link) => {
+      link.addEventListener('click', () => setActiveTab(link.dataset.tab));
+    });
+  </script>
+</body>
+</html>
