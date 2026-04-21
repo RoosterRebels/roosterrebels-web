@@ -1,15 +1,15 @@
 :root {
-  --bg: #f3f6fb;
-  --panel: #ffffff;
-  --panel-soft: #edf3ff;
-  --line: #dbe3ef;
-  --text: #08152d;
-  --muted: #5e6f88;
-  --accent: #6B5CFF;
-  --accent-2: #4C3FF2;
-  --radius: 20px;
-  --max: 1180px;
-  --shadow: 0 14px 40px rgba(15, 23, 42, 0.05);
+    --bg: #f3f6fb;
+    --panel: #ffffff;
+    --panel-soft: #edf3ff;
+    --line: #dbe3ef;
+    --text: #08152d;
+    --muted: #5e6f88;
+    --accent: #1E5EFF;
+    --accent-2: #0A3FCC;
+    --radius: 20px;
+    --max: 1180px;
+    --shadow: 0 14px 40px rgba(15, 23, 42, 0.05);
 }
 
 * { box-sizing: border-box; }
@@ -141,14 +141,14 @@ h1 {
 }
 
 .chip {
-  padding: 10px 16px;
-  border-radius: 999px;
-  border: 1px solid #e5ebf5;
-  background: var(--panel-soft);
-  color: #41516d;
-  font-size: 12px;
-  font-weight: 500;
-  white-space: nowrap;
+    padding: 10px 16px;
+    border-radius: 999px;
+    border: 1px solid #e5ebf5;
+    background: rgba(30, 94, 255, 0.08);
+    color: #41516d;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
 }
 
 .content-shell {
@@ -235,6 +235,12 @@ h2 {
   gap: 24px;
 }
 
+.card:hover {
+    transform: translateY(-4px);
+    transition: 0.2s ease;
+    box-shadow: 0 18px 50px rgba(30, 94, 255, 0.08);
+}
+
 .contact-row {
   display: flex;
   align-items: center;
@@ -263,8 +269,14 @@ h2 {
   color: #64748b;
 }
 
-.contact-muted {
-  color: #64748b;
+.contact-muted a {
+    color: var(--accent); 
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.contact-muted a:hover {
+        text-decoration: underline;
 }
 
 .divider {
@@ -315,18 +327,18 @@ textarea {
 }
 
 .btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  padding: 0 18px;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background: linear-gradient(135deg, var(--accent), var(--accent-2));
-  color: #fff;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 12px 28px rgba(107, 92, 255, 0.18);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 18px;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 12px 28px rgba(30, 94, 255, 0.22);
 }
 
 .form-note {
@@ -339,9 +351,8 @@ textarea {
 
 .email-links a {
   color: var(--accent);
-  text-decoration: underline;
   text-underline-offset: 2px;
-  font-weight: 700;
+  font-weight: 500;
 }
 
 footer {
