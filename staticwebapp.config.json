@@ -1,14 +1,4 @@
 {
-  "routes": [
-    {
-      "route": "/*",
-      "allowedRoles": ["anonymous"],
-      "headers": {
-        "Location": "https://www.roosterrebels.com"
-      },
-      "statusCode": 301
-    }
-  ],
   "navigationFallback": {
     "rewrite": "/index.html"
   }
